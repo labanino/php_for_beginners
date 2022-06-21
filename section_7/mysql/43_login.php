@@ -5,16 +5,6 @@ if(isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // echo "Good morning " . $username . "<br>";
-    // echo "Your password is " . $password;
-
-    // if($username && $password) {
-    //     echo $username;
-    //     echo $password;
-    // } else {
-    //     echo "this field cannot be blank";
-    // }
-
     $connection = mysqli_connect('localhost', 'root', 'root', 'loginapp'); 
 
     if($connection) {
@@ -26,8 +16,6 @@ if(isset($_POST['submit'])) {
 }
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">

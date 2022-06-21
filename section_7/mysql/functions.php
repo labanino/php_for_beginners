@@ -1,6 +1,7 @@
 <?php include "db.php"; ?>
 <?php
 
+// Show ids in the select dropdown
 function showAllData() {
 
     global $connection;
@@ -18,7 +19,8 @@ function showAllData() {
 
 }
 
-function UpdateTable() {
+// Update users table in the database
+function updateTable() {
 
     global $connection;
 
