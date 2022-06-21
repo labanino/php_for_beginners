@@ -1,10 +1,6 @@
 <?php include "db.php"; ?>
 <?php include "functions.php"; ?>
-<?php
-    if(isset($_POST['submit'])) {
-        updateTable();
-    }
-?>
+<?php updateTable(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +21,7 @@
 </head>
 
 <body>
-
+    <h1>Update</h1>
     <form action="48_login_update.php" method="post">
         <input for="username" id="username" name="username" type="text" placeholder="Username">
         <input type="password" for="password" id="password" name="password" placeholder="Enter your Password">
