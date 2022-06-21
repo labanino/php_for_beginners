@@ -7,9 +7,9 @@ if(isset($_POST['submit'])) {
 
     $connection = mysqli_connect('localhost', 'root', 'root', 'loginapp'); 
     if($connection) {
-        echo "We are connected";
+        echo "Record Created";
     } else {
-        die("Database connection failed");
+        die("Database Connection Failed");
     }
 
     $query = "INSERT INTO users(username,password) ";
@@ -18,7 +18,7 @@ if(isset($_POST['submit'])) {
     $result = mysqli_query($connection, $query);
 
     if(!$result) {
-        die("Query failed" . mysqli_error());
+        die("Query Failed" . mysqli_error());
     }
 
 }
