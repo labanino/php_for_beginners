@@ -26,7 +26,7 @@
 
 <body>
 
-    <form action="46_login_create.php" method="post">
+    <form action="48_login_update.php" method="post">
         <input for="username" id="username" name="username" type="text" placeholder="Username">
         <input type="password" for="password" id="password" name="password" placeholder="Enter your Password">
         <select name="id" id="">
