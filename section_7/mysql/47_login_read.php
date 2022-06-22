@@ -1,28 +1,19 @@
+<?php include "db.php"; ?>
+<?php include "functions.php"; ?>
 <?php
 
     $query = "SELECT * FROM users";
-
     $result = mysqli_query($connection, $query);
-
     if(!$result) {
         die("Query failed" . mysqli_error());
     }
 
-?>
+?>  
+<?php $title = "Reading Information in the database with PHP"; ?>
 
 
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reading Information in the Database with PHP</title>
-</head>
-
-<body>
+<?php include "includes/header.php" ?>
 
     <?php
         while($row = mysqli_fetch_assoc($result)) {
@@ -38,6 +29,4 @@
         }
     ?>
 
-</body>
-
-</html>
+<?php include "includes/footer.php" ?>

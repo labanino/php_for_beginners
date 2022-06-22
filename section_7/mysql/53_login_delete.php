@@ -1,6 +1,7 @@
 <?php include "db.php"; ?>
 <?php include "functions.php"; ?>
-<?php deleteRows(); ?>
+<?php deleteRows(); ?>  
+<?php $title = "Delete Records From Database with PHP"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
