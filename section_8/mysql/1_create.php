@@ -1,6 +1,6 @@
 <?php include "db.php"; ?>
 <?php include "functions.php"; ?>
-<?php createRows() ?>  
+<?php createRows(); ?>  
 <?php $title = "Creating Records into the database table with PHP"; ?>
 
 <?php include "includes/header.php" ?>
