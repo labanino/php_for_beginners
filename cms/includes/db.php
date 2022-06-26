@@ -1,7 +1,14 @@
 <?php
 
-$connection = mysqli_connect('localhost', 'root', 'root', 'cms');
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$database = "cms";
 
-// if($connection) {
-//     echo "We are connected";
-// }
+// Create connection
+$connection = mysqli_connect($servername,$username,$password,$database);
+
+// Check connection
+if(!$connection) {
+    echo (mysqli_connect_error());
+}
