@@ -21,7 +21,7 @@
             $search_query = mysqli_query($connection, $query);
 
             if(!$search_query) {
-                die("QUERY FAILDE" . mysqli_error_string($connection));
+                die("QUERY FAILED" . mysqli_error_string($connection));
             }
 
             $count = mysqli_num_rows($search_query);
