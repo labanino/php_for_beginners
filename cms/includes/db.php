@@ -10,5 +10,5 @@ $connection = mysqli_connect($servername,$username,$password,$database);
 
 // Check connection
 if(!$connection) {
-    echo (mysqli_connect_error());
+    die("CONNECTION FAILED: " . mysqli_connect_error());
 }
