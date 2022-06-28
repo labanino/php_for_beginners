@@ -18,8 +18,34 @@
                         </h1>
 
                         <div class="col-xs-6">
+
+                            <?php
+                                // Get data after submit
+                                if(isset($_POST['submit'])) {
+                                    $cat_title = $_POST['cat_title']; // Get 'cat_title' after submit 
+                                    
+                                    // Validates the 'cat_title'
+                                    if($cat_title == "" || empty($cat_title)) {
+                                        echo "This field should not be empty";
+                                    } else {
+                                        // If is not empty, insert into table
+                                        $query = "INSERT INTO categories(cat_title) ";
+                                        $query .= "VALUE('{$cat_title}') ";
+                                        
+                                        // Save query into variable
+                                        $create_category_query = mysqli_query($connection, $query);
+
+                                        // Kill connection if false
+                                        if(!$create_category_query) {
+                                            die('QUERY FAILED' . mysqli_error($connection));
+                                        }
+                                    }
+                                }
+
+                            ?>
+
                             <!-- Create Categories Form -->
-                            <form action="">
+                            <form action="" method="post">
                                 <div class="form-group">
                                     <label for="cat-title">Add Category</label>
                                     <input class="form-control" type="text" name="cat_title">
