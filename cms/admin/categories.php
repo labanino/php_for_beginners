@@ -28,7 +28,7 @@
                                     if($cat_title == "" || empty($cat_title)) {
                                         echo "This field should not be empty";
                                     } else {
-                                        // If is not empty, insert into table
+                                        // Not empty, insert into table
                                         $query = "INSERT INTO categories(cat_title) ";
                                         $query .= "VALUE('{$cat_title}') ";
                                         
@@ -56,12 +56,6 @@
                             </form>
                         </div>
                         <div class="col-xs-6">
-                            <?php
-                                $query = "SELECT * FROM categories";
-                                $select_categories = mysqli_query($connection,$query);
-                            ?>
-                        </div>
-                        <div class="col-xs-6">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -71,6 +65,11 @@
                                 </thead>
                                 <tbody>
                                     <?php
+                                    
+                                        // Query ID and Title from Categories table
+                                        $query = "SELECT * FROM categories";
+                                        $select_categories = mysqli_query($connection,$query);
+
                                         while($row = mysqli_fetch_assoc($select_categories)) {
                                             $cat_id = $row['cat_id'];
                                             $cat_title = $row['cat_title'];
@@ -78,8 +77,22 @@
                                             echo "<tr>";
                                             echo "<td>{$cat_id}</td>";
                                             echo "<td>{$cat_title}</td>";
+                                            echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
                                             echo "</tr>";
                                         }
+
+                                    ?>
+                                    <?php
+
+                                        // Delete Category Title from table
+                                        if(isset($_GET['delete'])) {
+                                            $the_cat_id = $_GET['delete'];
+                                            $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
+                                            $delete_query = mysqli_query($connection, $query);
+                                            // Refresh the page after deleting a Category Title
+                                            header("Location: categories.php");
+                                        }
+
                                     ?>
                                 </tbody>
                             </table>
