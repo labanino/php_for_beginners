@@ -18,31 +18,9 @@
                     </h1>
 
                     <div class="col-xs-6">
-
-                        <?php
-                                // Get data after submit
-                                if(isset($_POST['submit'])) {
-                                    $cat_title = $_POST['cat_title']; // Get 'cat_title' after submit 
-                                    
-                                    // Validates the 'cat_title'
-                                    if($cat_title == "" || empty($cat_title)) {
-                                        echo "This field should not be empty";
-                                    } else {
-                                        // Not empty, insert into table
-                                        $query = "INSERT INTO categories(cat_title) ";
-                                        $query .= "VALUE('{$cat_title}') ";
-                                        
-                                        // Save query into variable
-                                        $create_category_query = mysqli_query($connection, $query);
-
-                                        // Kill connection if false
-                                        if(!$create_category_query) {
-                                            die('QUERY FAILED' . mysqli_error($connection));
-                                        }
-                                    }
-                                }
-
-                            ?>
+                        
+                        <!-- Get data after submit -->
+                        <?php insertCategories(); ?>
 
                         <!-- Add Categories Form -->
                         <form action="" method="post">
@@ -77,35 +55,17 @@
                             <tbody>
                                 <?php
 
-                                        // Query ID and Title from Categories table
-                                        $query = "SELECT * FROM categories";
-                                        $select_categories = mysqli_query($connection,$query);
+                                    // Query ID and Title from Categories table
+                                    findAllCategories();
 
-                                        while($row = mysqli_fetch_assoc($select_categories)) {
-                                            $cat_id = $row['cat_id'];
-                                            $cat_title = $row['cat_title'];
+                                ?>
 
-                                            echo "<tr>";
-                                            echo "<td>{$cat_id}</td>";
-                                            echo "<td>{$cat_title}</td>";
-                                            echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
-                                            echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
-                                            echo "</tr>";
-                                        }
-
-                                    ?>
                                 <?php
 
-                                        // Delete Category Title from table
-                                        if(isset($_GET['delete'])) {
-                                            $the_cat_id = $_GET['delete'];
-                                            $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
-                                            $delete_query = mysqli_query($connection, $query);
-                                            // Refresh the page after deleting a Category Title
-                                            header("Location: categories.php");
-                                        }
+                                    // Delete Category Title from table
+                                    deleteCategories();
 
-                                    ?>
+                                ?>
                             </tbody>
                         </table>
                     </div>
