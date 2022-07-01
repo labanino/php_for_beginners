@@ -1,5 +1,14 @@
 <?php 
 
+    function comfirmQuery($result) {
+
+        global $connection;
+        
+        if(!$result) {
+            die("QUERY FAILED: " . mysqli_error_string($connection));
+        }
+    }
+
     function insertCategories() {
 
         global $connection;
