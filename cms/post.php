@@ -63,8 +63,15 @@
                     $comment_email = $_POST['comment_email'];
                     $comment_content = $_POST['comment_content'];
 
-                    $query = "INSERT INTO comments(comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
-                    $query .= "VALUES($the_post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
+                    $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
+                    $query .= "VALUES ($the_post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
+
+                    $create_comment_query = mysqli_query($connection, $query); 
+
+                    if(!$create_comment_query) {
+                        die("QUERY FAILED: " . mysqli_error($connection));
+                    }
+                    
                 }
 
             ?>
@@ -80,7 +87,7 @@
                         <input type="text" class="form-control" name="comment_email" placeholder="Email" rows="3"></input>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="Your comment here..." rows="3"></textarea>
+                        <textarea class="form-control" name="comment_content" placeholder="Your comment here..." rows="3"></textarea>
                     </div>
                     <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
                 </form>
