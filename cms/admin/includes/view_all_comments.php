@@ -8,8 +8,8 @@
             <th>Status</th>
             <th>In Response to</th>
             <th>Date</th>
-            <th>Approved</th>
-            <th>Unapproved</th>
+            <th>Approve</th>
+            <th>Unapprove</th>
         </tr>
     </thead>
     <tbody>
@@ -57,8 +57,8 @@
             }
 
             echo "<td>$comment_date</td>";
-            echo "<td><a href='comments.php?approved=$comment_id'>Approved</a></td>";
-            echo "<td><a href='comments.php?unapproved=$comment_id'>Unapproved</a></td>";
+            echo "<td><a href='comments.php?approve=$comment_id'>Approve</a></td>";
+            echo "<td><a href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
             echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
             echo "</tr>";
         }
@@ -71,20 +71,20 @@
 <?php
 
     // Approved
-    if(isset($_GET['approved'])) {
-        $the_comment_id = $_GET['approved'];
+    if(isset($_GET['approve'])) {
+        $the_comment_id = $_GET['approve'];
 
-        $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = '$the_comment_id' ";
+        $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = '$the_comment_id' ";
         $approved_comment_query = mysqli_query($connection, $query);
         // to refresh page after delete
         header("Location: comments.php");
     }
 
     // Unapproved
-    if(isset($_GET['unapproved'])) {
-        $the_comment_id = $_GET['unapproved'];
+    if(isset($_GET['unapprove'])) {
+        $the_comment_id = $_GET['unapprove'];
 
-        $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = '$the_comment_id' ";
+        $query = "UPDATE comments SET comment_status = 'Unapproved' WHERE comment_id = '$the_comment_id' ";
         $unapproved_comment_query = mysqli_query($connection, $query);
         // to refresh page after delete
         header("Location: comments.php");
