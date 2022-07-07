@@ -64,6 +64,10 @@
                     $comment_email = mysqli_real_escape_string($connection, $_POST['comment_email']);
                     $comment_content = mysqli_real_escape_string($connection, $_POST['comment_content']);
 
+                    // Change character set to utf8
+                    mysqli_set_charset($connection,"utf8");
+                    mysqli_character_set_name($connection);
+
                     $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
                     $query .= "VALUES ($the_post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
 

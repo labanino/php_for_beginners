@@ -57,8 +57,8 @@
             }
 
             echo "<td>$comment_date</td>";
-            echo "<td><a href='posts.php?source=edit_post&p_id='>Approved</a></td>";
-            echo "<td><a href='posts.php?delete='>Unapproved</a></td>";
+            echo "<td><a href='comments.php?approved=$comment_id'>Approved</a></td>";
+            echo "<td><a href='comments.php?unapproved=$comment_id'>Unapproved</a></td>";
             echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
             echo "</tr>";
         }
@@ -69,6 +69,26 @@
 </table>
 
 <?php
+
+    // Approved
+    if(isset($_GET['approved'])) {
+        $the_comment_id = $_GET['approved'];
+
+        $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = '$the_comment_id' ";
+        $approved_comment_query = mysqli_query($connection, $query);
+        // to refresh page after delete
+        header("Location: comments.php");
+    }
+
+    // Unapproved
+    if(isset($_GET['unapproved'])) {
+        $the_comment_id = $_GET['unapproved'];
+
+        $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = '$the_comment_id' ";
+        $unapproved_comment_query = mysqli_query($connection, $query);
+        // to refresh page after delete
+        header("Location: comments.php");
+    }
 
     // Delete comments from the comments table
     if(isset($_GET['delete'])) {
