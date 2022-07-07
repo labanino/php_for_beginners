@@ -28,6 +28,7 @@
                     $post_image = $row['post_image'];
                     $post_content = $row['post_content'];
 
+                
                 ?>
 
             <h1 class="page-header">
@@ -59,9 +60,9 @@
 
                 if(isset($_POST['create_comment'])) {
                     $the_post_id = $_GET['p_id'];
-                    $comment_author = $_POST['comment_author'];
-                    $comment_email = $_POST['comment_email'];
-                    $comment_content = $_POST['comment_content'];
+                    $comment_author = mysqli_real_escape_string($connection, $_POST['comment_author']);
+                    $comment_email = mysqli_real_escape_string($connection, $_POST['comment_email']);
+                    $comment_content = mysqli_real_escape_string($connection, $_POST['comment_content']);
 
                     $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
                     $query .= "VALUES ($the_post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
