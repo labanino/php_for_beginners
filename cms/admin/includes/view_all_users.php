@@ -72,7 +72,7 @@
     if(isset($_GET['change_to_admin'])) {
         $the_user_id = $_GET['change_to_admin'];
 
-        $query = "UPDATE users SET user_role = 'admin' WHERE user_id = '$the_user_id' ";
+        $query = "UPDATE users SET user_role = 'admin' WHERE user_id = {$the_user_id} ";
         $change_to_admin_query = mysqli_query($connection, $query);
         // to refresh page after change
         header("Location: users.php");
@@ -82,7 +82,7 @@
     if(isset($_GET['change_to_subscriber'])) {
         $the_subscriber_id = $_GET['change_to_subscriber'];
 
-        $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = '$the_subscriber_id' ";
+        $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = {$the_subscriber_id} ";
         $change_to_subscriber_query = mysqli_query($connection, $query);
         // to refresh page after change
         header("Location: users.php");
@@ -92,8 +92,8 @@
     if(isset($_GET['delete'])) {
         $the_user_id = $_GET['delete'];
 
-        $query = "UPDATE users SET user_role = 'admin' WHERE user_id = '$the_user_id' ";
-        $change_to_admin_query = mysqli_query($connection, $query);
+        $query = "DELETE FROM users WHERE user_id = {$the_user_id} ";
+        $delete_user_query = mysqli_query($connection, $query);
         // to refresh page after change
         header("Location: users.php");
     }
