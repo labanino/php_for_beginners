@@ -26,13 +26,13 @@
                         }
 
                         switch($source) {
-                            case 'add_post';
+                            case 'add_post':
                                 include "includes/add_post.php";
                                 break;
-                            case 'edit_post';
+                            case 'edit_post':
                                 include "includes/edit_post.php";
                                 break;
-                            case '200';
+                            case '200':
                                 echo "NICE 200";
                                 break;
                             default:
