@@ -27,7 +27,7 @@
             $db_user_role = $row['user_role'];
         }
 
-        if($username == $db_username && $password == $db_user_password ) {
+        if($username === $db_username && $password === $db_user_password ) {
 
             $_SESSION['user_username'] = $db_username;
             $_SESSION['user_firstname'] = $db_user_firstname;
@@ -38,7 +38,6 @@
         } else {
             header("Location: ../index.php ");
         }
-
     }
 
 ?>
