@@ -77,7 +77,8 @@
                         die("QUERY FAILED: " . mysqli_error($connection));
                     }
 
-                    $query = "UPDATE posts SET post_comment_count += 1 WHERE post_id = $the_post_id ";
+                    // IMPORTANT: Remember to "approve" the comment for it to show up in the post
+                    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $the_post_id ";
                     $update_comment_count = mysqli_query($connection, $query);
                     
                 }
@@ -107,8 +108,7 @@
             <?php
 
                 $query = "SELECT * FROM comments WHERE comment_post_id = {$the_post_id} ";
-                $query .= "AND comment_status = 'approved' ";
-                $query .= "ORDER BY comment_id DESC ";
+                $query .= "AND comment_status = 'approved' ORDER BY comment_id DESC ";
                 $select_comment_query = mysqli_query($connection, $query);
 
                 if(!$select_comment_query) {
