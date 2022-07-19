@@ -39,6 +39,10 @@
     <![endif]-->
     
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- include summernote css -->
+    <link href="css/summernote.css" rel="stylesheet">
+
 </head>
 
 <body>
