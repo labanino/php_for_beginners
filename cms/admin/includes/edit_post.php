@@ -56,6 +56,9 @@
         $update_post = mysqli_query($connection, $query);
 
         confirmQuery($update_post);
+
+        // Success Alert after editing post
+        echo "<div class='alert alert-success' role='alert'>Post Updated: " . " " . "<a href='../post.php?p_id={$the_post_id}'>View Post</a> or <a href='posts.php'>Edit More Posts</a></div> ";
     }
 ?>
 

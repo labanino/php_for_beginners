@@ -4,15 +4,9 @@
         $user_lastname = $_POST['user_lastname'];
         $user_role = $_POST['user_role'];
 
-        // $post_image = $_FILES['image']['name'];
-        // $post_image_temp = $_FILES['image']['tmp_name'];
-
         $user_username = $_POST['user_username'];
         $user_email = $_POST['user_email'];
         $user_password = $_POST['user_password'];
-        // $post_date = date('d-m-y');
-
-        // move_uploaded_file($post_image_temp, "../images/$post_image" );
 
         $query = "INSERT INTO users(user_firstname, user_lastname, user_role, user_username, user_email, user_password) ";
 
@@ -47,10 +41,6 @@
         <label for="username">Username</label>
         <input type="text" class="form-control" name="user_username">
     </div>
-    <!-- <div class="form-group">
-        <label for="post_image">Post Image</label>
-        <input type="file" name="image">
-    </div> -->
     <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" name="user_email">
