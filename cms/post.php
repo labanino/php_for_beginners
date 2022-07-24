@@ -63,25 +63,28 @@
                     $comment_email = mysqli_real_escape_string($connection, $_POST['comment_email']);
                     $comment_content = mysqli_real_escape_string($connection, $_POST['comment_content']);
 
-                    // Change character set to utf8
-                    mysqli_set_charset($connection,"utf8");
-                    mysqli_character_set_name($connection);
+                    if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
+                        // Change character set to utf8
+                        mysqli_set_charset($connection,"utf8");
+                        mysqli_character_set_name($connection);
 
-                    $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
-                    $query .= "VALUES ($the_post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
+                        $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
+                        $query .= "VALUES ($the_post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
 
-                    $create_comment_query = mysqli_query($connection, $query); 
+                        $create_comment_query = mysqli_query($connection, $query); 
 
-                    if(!$create_comment_query) {
-                        die("QUERY FAILED: " . mysqli_error($connection));
+                        if(!$create_comment_query) {
+                            die("QUERY FAILED: " . mysqli_error($connection));
+                        }
+
+                        // IMPORTANT: Remember to "approve" the comment for it to show up in the post
+                        $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $the_post_id ";
+                        $update_comment_count = mysqli_query($connection, $query);
+                        
+                    } else {
+                        echo "<script>alert('Fields Cannot Be Empty!');</script>";
                     }
-
-                    // IMPORTANT: Remember to "approve" the comment for it to show up in the post
-                    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $the_post_id ";
-                    $update_comment_count = mysqli_query($connection, $query);
-                    
                 }
-
             ?>
 
             <!-- Comments Form -->

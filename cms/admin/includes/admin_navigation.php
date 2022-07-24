@@ -13,7 +13,13 @@
     <ul class="nav navbar-right top-nav">
         <li><a href="../">Home</a></li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['user_username']; ?> <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
+            <?php 
+                // Have to check with 'isset' because you will get an error if the session is not available
+                if(isset($_SESSION['user_username'])) {
+                    echo $_SESSION['user_username']; 
+                }
+            ?> <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
                     <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
