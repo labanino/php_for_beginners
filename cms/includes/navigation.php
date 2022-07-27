@@ -42,29 +42,23 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                <?php
-                    // $query = "SELECT * FROM categories";
-                    // $select_all_categories_query = mysqli_query($connection,$query);
+                    <li>
+                        <a href="./admin/">Admin</a>
+                    </li>
+                    <li>
+                        <a href="registration.php">Registration</a>
+                    </li>   
+                    <?php
+                        // Without it you won't see the link and session won't start
+                        if (session_status() === PHP_SESSION_NONE) session_start();
 
-                    // while($row = mysqli_fetch_assoc($select_all_categories_query)) {
-                    //     $cat_title = $row['cat_title'];
-                    //     echo "<li><a href='#'>{$cat_title}</a></li>";
-                    // }
-                ?>
-                <li>
-                    <a href="./admin/">Admin</a>
-                </li>  
-                <?php
-                    // Without it you won't see the link and session won't start
-                    if (session_status() === PHP_SESSION_NONE) session_start();
-
-                    if(isset($_SESSION['user_role'])) {
-                        if(isset($_GET['p_id'])) {
-                            $the_post_id = $_GET['p_id'];
-                            echo "<li><a href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
-                        }
-                    } 
-                ?>
+                        if(isset($_SESSION['user_role'])) {
+                            if(isset($_GET['p_id'])) {
+                                $the_post_id = $_GET['p_id'];
+                                echo "<li><a href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
+                            }
+                        } 
+                    ?>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

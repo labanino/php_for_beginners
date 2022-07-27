@@ -3,9 +3,9 @@
 
 <?php
     if(isset($_POST['submit'])) {
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $username = $_POST['user_username'];
+        $email = $_POST['user_email'];
+        $password = $_POST['user_password'];
 
         $username = mysqli_real_escape_string($connection, $username);
         $email = mysqli_real_escape_string($connection, $email);
@@ -15,11 +15,18 @@
         $select_randsalt_query = mysqli_query($connection, $query);
 
         if(!$select_randsalt_query) {
-            die("CONNECTION FAILED: " . mysqli_error());
+            die("CONNECTION FAILED: " . mysqli_error($connection));
         }
 
-        while ($row = mysqli_fetch_array($select_randsalt_query)) {
-            echo $salt = $row['randSalt'];
+        $row = mysqli_fetch_array($select_randsalt_query);
+        $salt = $row['randSalt'];
+
+        $query = "INSERT INTO users(user_username, user_email, user_password, user_role) ";
+        $query .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber' ) ";
+        $register_user_query = mysqli_query($connection, $query);
+
+        if(!$register_user_query) {
+            die("CONNECTION FAILED: " . mysqli_error($connection) . ' ' . mysqli_errno($connection));
         }
     }
 ?>
@@ -40,16 +47,16 @@
             <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
                 <div class="form-group">
                 <label for="username" class="sr-only">username</label>
-                <input type="text" name="username" id="username" class="form-control"
+                <input type="text" name="user_username" id="username" class="form-control"
                     placeholder="Enter Desired Username">
                 </div>
                 <div class="form-group">
                 <label for="email" class="sr-only">Email</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
+                <input type="email" name="user_email" id="email" class="form-control" placeholder="somebody@example.com">
                 </div>
                 <div class="form-group">
                 <label for="password" class="sr-only">Password</label>
-                <input type="password" name="password" id="key" class="form-control" placeholder="Password">
+                <input type="password" name="user_password" id="key" class="form-control" placeholder="Password">
                 </div>
 
                 <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">
