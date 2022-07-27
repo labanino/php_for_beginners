@@ -20,8 +20,10 @@
                 die("CONNECTION FAILED: " . mysqli_error($connection));
             }
 
+            // Password authentication
             $row = mysqli_fetch_array($select_randsalt_query);
             $salt = $row['randSalt'];
+            $password = crypt($password, $salt);
 
             $query = "INSERT INTO users(user_username, user_email, user_password, user_role) ";
             $query .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber' ) ";
@@ -38,6 +40,7 @@
             $message = "<div class='alert alert-danger' role='alert'>Fields cannot be empty</div>";
 
         }
+        
     } else {
 
         $message = "";
