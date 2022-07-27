@@ -7,27 +7,41 @@
         $email = $_POST['user_email'];
         $password = $_POST['user_password'];
 
-        $username = mysqli_real_escape_string($connection, $username);
-        $email = mysqli_real_escape_string($connection, $email);
-        $password = mysqli_real_escape_string($connection, $password);
+        if(!empty($username) && !empty($email) && !empty($password)) {
 
-        $query = "SELECT randSalt FROM users";
-        $select_randsalt_query = mysqli_query($connection, $query);
+            $username = mysqli_real_escape_string($connection, $username);
+            $email = mysqli_real_escape_string($connection, $email);
+            $password = mysqli_real_escape_string($connection, $password);
 
-        if(!$select_randsalt_query) {
-            die("CONNECTION FAILED: " . mysqli_error($connection));
+            $query = "SELECT randSalt FROM users";
+            $select_randsalt_query = mysqli_query($connection, $query);
+
+            if(!$select_randsalt_query) {
+                die("CONNECTION FAILED: " . mysqli_error($connection));
+            }
+
+            $row = mysqli_fetch_array($select_randsalt_query);
+            $salt = $row['randSalt'];
+
+            $query = "INSERT INTO users(user_username, user_email, user_password, user_role) ";
+            $query .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber' ) ";
+            $register_user_query = mysqli_query($connection, $query);
+
+            if(!$register_user_query) {
+                die("CONNECTION FAILED: " . mysqli_error($connection) . ' ' . mysqli_errno($connection));
+            }
+
+            $message = "<div class='alert alert-success' role='alert'>Your Registration has been submitted.</div>"; 
+
+        } else {
+
+            $message = "<div class='alert alert-danger' role='alert'>Fields cannot be empty</div>";
+
         }
+    } else {
 
-        $row = mysqli_fetch_array($select_randsalt_query);
-        $salt = $row['randSalt'];
+        $message = "";
 
-        $query = "INSERT INTO users(user_username, user_email, user_password, user_role) ";
-        $query .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber' ) ";
-        $register_user_query = mysqli_query($connection, $query);
-
-        if(!$register_user_query) {
-            die("CONNECTION FAILED: " . mysqli_error($connection) . ' ' . mysqli_errno($connection));
-        }
     }
 ?>
 
@@ -43,7 +57,12 @@
         <div class="row">
         <div class="col-xs-6 col-xs-offset-3">
             <div class="form-wrap">
+
             <h1>Register</h1>
+            
+            <!-- Registration alert if empty -->
+            <?php echo $message; ?>
+
             <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
                 <div class="form-group">
                 <label for="username" class="sr-only">username</label>
