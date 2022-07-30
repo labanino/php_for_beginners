@@ -29,7 +29,7 @@
         $query = "SELECT randSalt FROM users";
         $select_randsalt_query = mysqli_query($connection, $query);
 
-        if(!$select_user_query) {
+        if(!$select_randsalt_query) {
             die("QUERY FAILED: " . mysqli_error($connection));
         }
 
@@ -63,7 +63,7 @@
     </div>
     <div class="form-group">
         <select name="user_role" id="">
-            <option value="subscriber"><?php echo $user_role; ?></option>
+            <option value="<?php echo $user_role; ?>"><?php echo $user_role; ?></option>
             <?php
                 if($user_role == 'admin') {
                     echo "<option value='subscriber'>subscriber</option>";
