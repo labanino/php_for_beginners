@@ -49,6 +49,9 @@
         $edit_user_query = mysqli_query($connection, $query);
 
         confirmQuery($edit_user_query);
+        
+        // Success Alert after creating a new user
+        echo "<div class='alert alert-success' role='alert'>User Updated: " . " " . "<a href='users.php'>View Users</a></div> ";
     }
 ?>
 
