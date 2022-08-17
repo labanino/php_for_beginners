@@ -16,7 +16,9 @@
 
                 if(isset($_GET['p_id'])) {
                     $the_post_id = $_GET['p_id'];
-                }
+                
+                $view_query ="UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $the_post_id ";
+                $send_query = mysqli_query($connection, $view_query);
 
                 $query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
                 $select_all_posts_query = mysqli_query($connection,$query);
@@ -27,14 +29,7 @@
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
                     $post_content = $row['post_content'];
-
-                
                 ?>
-
-            <!-- <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
-            </h1> -->
 
             <!-- First Blog Post -->
             <h2>
@@ -51,7 +46,13 @@
 
             <hr>
 
-            <?php } ?>
+            <?php }
+        
+            } else {
+                header("Location: index.php");
+            }
+            
+            ?>
 
             <!-- Blog Comments -->
 
